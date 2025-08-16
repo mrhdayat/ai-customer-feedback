@@ -3,7 +3,6 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { 
   BarChart3, 
-  Settings, 
   User, 
   LogOut, 
   Menu, 
@@ -15,9 +14,8 @@ import {
   Moon,
   Sun
 } from 'lucide-react'
-import { useAuthStore, isDemo, isMemberOrAdmin } from '@/store/auth'
+import { useAuthStore, isDemo } from '@/store/auth'
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 
 interface LayoutProps {

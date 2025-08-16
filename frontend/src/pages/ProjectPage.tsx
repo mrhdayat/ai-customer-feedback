@@ -16,13 +16,12 @@ import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { LoadingState, EmptyState } from '@/components/ui/loading'
 import { Badge } from '@/components/ui/badge'
-import { useAuthStore, isDemo, isMemberOrAdmin } from '@/store/auth'
+import { isDemo, isMemberOrAdmin } from '@/store/auth'
 import { api } from '@/services/api'
-import { formatRelativeTime, getSentimentColor, getUrgencyColor, truncateText } from '@/lib/utils'
+import { formatRelativeTime, getUrgencyColor, truncateText } from '@/lib/utils'
 
 export function ProjectPage() {
   const { projectId } = useParams<{ projectId: string }>()
-  const { user } = useAuthStore()
   const [searchTerm, setSearchTerm] = useState('')
   const [activeTab, setActiveTab] = useState<'feedbacks' | 'insights' | 'automation'>('feedbacks')
 

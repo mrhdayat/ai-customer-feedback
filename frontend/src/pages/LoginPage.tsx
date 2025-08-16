@@ -7,7 +7,6 @@ import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useAuthStore } from '@/store/auth'
 import { api } from '@/services/api'
-import { cn } from '@/lib/utils'
 
 export function LoginPage() {
   const [email, setEmail] = useState('')

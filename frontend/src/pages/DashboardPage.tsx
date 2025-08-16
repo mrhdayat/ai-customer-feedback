@@ -5,7 +5,6 @@ import {
   Plus, 
   MessageSquare, 
   TrendingUp, 
-  Users, 
   Zap,
   BarChart3,
   PieChart,
@@ -29,7 +28,7 @@ export function DashboardPage() {
   })
 
   // Get project summary for selected project
-  const { data: summaryData, isLoading: summaryLoading } = useQuery({
+  const { data: summaryData } = useQuery({
     queryKey: ['project-summary', selectedProject],
     queryFn: () => selectedProject ? api.getProjectSummary(selectedProject) : null,
     enabled: !!selectedProject,

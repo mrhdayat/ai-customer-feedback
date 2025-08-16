@@ -7,7 +7,6 @@ import {
   Analysis, 
   ProjectSummary,
   OrchestrateJob,
-  PaginatedResponse 
 } from '@/types'
 
 const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000'
@@ -19,12 +18,19 @@ class APIClient {
   ): Promise<APIResponse<T>> {
     const url = `${API_BASE_URL}${endpoint}`
     
+    const authHeader = getAuthHeader()
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      ...(options.headers as Record<string, string> || {}),
+    }
+    
+    // Add auth header if it exists
+    if (authHeader && authHeader.Authorization) {
+      headers.Authorization = authHeader.Authorization
+    }
+    
     const config: RequestInit = {
-      headers: {
-        'Content-Type': 'application/json',
-        ...getAuthHeader(),
-        ...options.headers,
-      },
+      headers,
       ...options,
     }
 
