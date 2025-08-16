@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+      - HUGGINGFACE_API_TOKEN=${HUGGINGFACE_API_TOKEN}
+      - IBM_WATSON_NLU_API_KEY=${IBM_WATSON_NLU_API_KEY}
+      - IBM_WATSON_NLU_URL=${IBM_WATSON_NLU_URL}
+      - REPLICATE_API_TOKEN=${REPLICATE_API_TOKEN}
+      - IBM_ORCHESTRATE_API_KEY=${IBM_ORCHESTRATE_API_KEY}
+      - IBM_ORCHESTRATE_BASE_URL=${IBM_ORCHESTRATE_BASE_URL}
+      - BACKEND_SECRET_KEY=${BACKEND_SECRET_KEY}
+      - BACKEND_ALGORITHM=${BACKEND_ALGORITHM}
+      - BACKEND_ACCESS_TOKEN_EXPIRE_MINUTES=${BACKEND_ACCESS_TOKEN_EXPIRE_MINUTES}
+      - RATE_LIMIT_PER_MINUTE=${RATE_LIMIT_PER_MINUTE}
+      - FRONTEND_URL=${FRONTEND_URL}
+      - ENVIRONMENT=${ENVIRONMENT}
+    volumes:
+      - ./backend:/app
+    env_file:
+      - .env
+    depends_on:
+      - redis
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_SUPABASE_URL=${SUPABASE_URL}
+      - VITE_SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
+      - VITE_BACKEND_URL=http://localhost:8000
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    env_file:
+      - .env
+    depends_on:
+      - backend
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+
+volumes:
+  redis_data:
