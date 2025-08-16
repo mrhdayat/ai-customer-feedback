@@ -297,10 +297,6 @@ curl http://localhost:3000
 4. Push ke branch (`git push origin feature/AmazingFeature`)
 5. Buat Pull Request
 
-## 📝 License
-
-Project ini menggunakan MIT License. Lihat file `LICENSE` untuk detail.
-
 ## 👨‍💻 Author
 
 **mrhdayat**
