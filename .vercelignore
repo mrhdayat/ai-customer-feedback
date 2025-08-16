@@ -1,0 +1,11 @@
+backend/
+database/
+*.md
+.git/
+.github/
+docker-compose*.yml
+Dockerfile*
+setup.sh
+test-docker.sh
+*.env
+config.env
